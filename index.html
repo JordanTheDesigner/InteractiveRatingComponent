@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+  <title>Frontend Mentor | Interactive rating component</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap');
+  </style>
+</head>
+<body>
+
+  <!-- Rating state start -->
+  <div id="MainContainer" role="main">
+    <div id="ContentContainer">
+      <div id="SubmitContent">
+      <div id="StarIcon"><img src="images/icon-star.svg" alt="Star Icon"></div>
+      <h1>How did we do?</h1>
+
+      <p>Please let us know how we did with your support request. All feedback is appreciated
+      to help us improve our offering!</p>
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+      </ul>
+
+      <button id="Submit">Submit</button>
+      </div>
+      <!-- Rating state end -->
+
+      <!-- Thank you state start -->
+      <div id="ThankYouContent">
+        <div id="SubmitIcon"><img src="images/illustration-thank-you.svg" alt="Submit Image"></div>
+        <p id="YouSelected">You selected <span id="Rating"></span> out of 5</p>
+
+        <h1>Thank you!</h1>
+
+        <p>We appreciate you taking the time to give a rating. If you ever need more support,
+        don’t hesitate to get in touch!</p>
+      </div>
+      <!-- Thank you state end -->
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(e) {
+    $( "li" ).each(function(index) {
+        $(this).click(function(e) {
+            $('#Rating li').remove();
+            $(this).clone().appendTo('#Rating');
+        });
+      });
+
+      $("#Submit").click(function(e){
+        $('#ThankYouContent').css('display','block');
+        $('#SubmitContent').css('display','none');
+      });
+
+      $('#SubmitContent ul li').click(function() {
+               $('#SubmitContent ul li').css('background-color', '#262F38');
+               $(this).css('background-color', 'hsl(25, 97%, 53%)');
+               $(this).data("bgColor", "hsl(25, 97%, 53%)");
+               return false;
+       });
+
+       $('#SubmitContent ul li').hover(function() {
+                        $(this).data("bgColor", $(this).css('background-color'));
+                        $(this).css('background-color', 'hsl(216, 12%, 54%)');
+                }, function() {
+                        $(this).css('background-color', $(this).data("bgColor"));
+                });
+      });
+</script>
+
+</body>
+</html>
